@@ -254,8 +254,8 @@ export default function AdminLayout({ children }) {
       <aside className={`admin-sidebar ${sidebarOpen ? 'open' : 'collapsed'}`}>
         <div className="admin-sidebar-header">
           <div className="admin-brand-box">
-            <div className="admin-logo-mark">
-              <Boxes size={22} />
+            <div className="admin-logo-mark" style={{ overflow: 'hidden', padding: 0 }}>
+              <img src="/favicon.png" alt="Admin Panda" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 10 }} />
             </div>
             <div className="admin-brand-text">
               <h1 className="admin-brand-title">InventoryApp</h1>
