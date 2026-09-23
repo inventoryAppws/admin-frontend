@@ -12,20 +12,20 @@
   --admin-danger: #ef4444;
   --admin-purple: #8b5cf6;
 
-  /* Dark Theme (Default) */
-  --admin-bg: #0b0f19;
-  --admin-sidebar-bg: #0e1424;
-  --admin-card-bg: #111827;
-  --admin-card-hover: #161f32;
-  --admin-surface: #151e32;
-  --admin-border: #1e293b;
-  --admin-border-light: #28354b;
-  --admin-text-main: #f8fafc;
-  --admin-text-muted: #94a3b8;
-  --admin-text-sub: #64748b;
-  --admin-input-bg: #0b0f19;
-  --admin-input-border: #28354b;
-  --admin-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  /* Dark Theme (Default) - Complete OLED Black */
+  --admin-bg: #000000;
+  --admin-sidebar-bg: #000000;
+  --admin-card-bg: #0a0a0c;
+  --admin-card-hover: #121215;
+  --admin-surface: #0e0e11;
+  --admin-border: #1a1a20;
+  --admin-border-light: #24242c;
+  --admin-text-main: #ffffff;
+  --admin-text-muted: #a1a1aa;
+  --admin-text-sub: #71717a;
+  --admin-input-bg: #050505;
+  --admin-input-border: #24242c;
+  --admin-shadow: 0 4px 24px rgba(0, 0, 0, 0.75);
 
   /* Interoperability / Generic Aliases (Dark) */
   --bg-body: var(--admin-bg);
@@ -151,6 +151,156 @@ body {
 .admin-sidebar-header {
   padding: 20px 20px 16px;
   border-bottom: 1px solid var(--admin-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-sidebar-collapse-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid var(--admin-border);
+  background: transparent;
+  color: var(--admin-text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-left: auto;
+}
+
+.admin-sidebar-collapse-btn:hover {
+  background: var(--admin-hover);
+  color: var(--admin-text-main);
+}
+
+.admin-topbar-sidebar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1.5px solid var(--admin-border);
+  background: transparent;
+  color: var(--admin-text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.admin-topbar-sidebar-btn:hover {
+  background: var(--admin-hover);
+  color: var(--admin-text-main);
+}
+
+/* Collapsed Admin Sidebar */
+.admin-sidebar.collapsed {
+  width: 72px;
+}
+
+.admin-sidebar.collapsed .admin-brand-text,
+.admin-sidebar.collapsed .admin-brand-badge,
+.admin-sidebar.collapsed .admin-nav-group-header,
+.admin-sidebar.collapsed .nav-label,
+.admin-sidebar.collapsed .nav-badge,
+.admin-sidebar.collapsed .admin-user-info {
+  display: none !important;
+}
+
+.admin-sidebar.collapsed .admin-sidebar-header {
+  padding: 16px 8px;
+  justify-content: center;
+}
+
+.admin-sidebar.collapsed .admin-brand-box {
+  justify-content: center;
+}
+
+.admin-sidebar.collapsed .admin-sidebar-collapse-btn {
+  display: none;
+}
+
+.admin-sidebar.collapsed .admin-nav-item {
+  justify-content: center;
+  padding: 11px 0;
+}
+
+.admin-sidebar.collapsed .admin-nav-item .nav-icon {
+  margin: 0;
+}
+
+.admin-sidebar.collapsed .admin-sidebar-footer {
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  padding: 14px 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.admin-sidebar.collapsed .admin-user-preview {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.admin-sidebar.collapsed .admin-avatar {
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  min-height: 36px !important;
+  max-width: 36px !important;
+  max-height: 36px !important;
+  flex: 0 0 36px !important;
+  border-radius: 50% !important;
+  margin: 0 auto !important;
+  aspect-ratio: 1 / 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+}
+
+.admin-sidebar.collapsed .admin-footer-actions {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+
+.admin-sidebar.collapsed .admin-logout-btn,
+.admin-sidebar.collapsed .admin-footer-collapse-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  min-height: 36px !important;
+  border-radius: 8px !important;
+  margin: 0 auto !important;
+  flex-shrink: 0 !important;
+  border: 1px solid var(--admin-border) !important;
+  background: var(--admin-card-bg) !important;
+  color: var(--admin-text-sub) !important;
+}
+
+.admin-sidebar.collapsed .admin-logout-btn:hover,
+.admin-sidebar.collapsed .admin-footer-collapse-btn:hover {
+  background: var(--admin-card-hover) !important;
+  color: var(--admin-text-main) !important;
+  border-color: var(--admin-border-light) !important;
 }
 
 .admin-brand-box {
@@ -297,12 +447,14 @@ body {
 }
 
 .admin-sidebar-footer {
-  padding: 14px 16px;
+  padding: 12px 14px;
   border-top: 1px solid var(--admin-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: var(--admin-sidebar-bg);
+  min-height: 62px;
+  box-sizing: border-box;
 }
 
 .admin-user-preview {
@@ -310,11 +462,15 @@ body {
   align-items: center;
   gap: 10px;
   min-width: 0;
+  flex: 1;
 }
 
 .admin-avatar {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  flex: 0 0 36px;
   border-radius: 50%;
   background: var(--admin-surface);
   border: 1.5px solid var(--admin-primary);
@@ -324,6 +480,7 @@ body {
   justify-content: center;
   font-weight: 700;
   font-size: 13px;
+  aspect-ratio: 1 / 1;
 }
 
 .admin-user-info {
@@ -362,6 +519,30 @@ body {
 .admin-logout-btn:hover {
   background: var(--admin-surface);
   color: var(--admin-danger);
+}
+
+.admin-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.admin-footer-collapse-btn {
+  background: transparent;
+  border: none;
+  color: var(--admin-text-sub);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-footer-collapse-btn:hover {
+  background: var(--admin-surface);
+  color: var(--admin-primary);
 }
 
 /* Main Viewport */

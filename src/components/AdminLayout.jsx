@@ -46,7 +46,9 @@ import {
   Calendar,
   Sparkles,
   Loader2,
-  ShieldCheck
+  ShieldCheck,
+  PanelLeftClose,
+  PanelLeft
 } from 'lucide-react';
 import { useTheme } from '../theme/ThemeContext';
 import { toast } from './Toast';
@@ -132,7 +134,23 @@ export default function AdminLayout({ children }) {
   const { isDark, toggleTheme } = useTheme();
   const [collapsedGroups, setCollapsedGroups] = useState({});
   const [searchModalOpen, setSearchModalOpen] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(() => {
+    try {
+      return localStorage.getItem('admin_sidebar_open') !== 'false';
+    } catch {
+      return true;
+    }
+  });
+
+  const toggleSidebar = () => {
+    setSidebarOpen((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem('admin_sidebar_open', String(next));
+      } catch {}
+      return next;
+    });
+  };
   const [sendingEmails, setSendingEmails] = useState(false);
   const [emailMenuOpen, setEmailMenuOpen] = useState(false);
 
@@ -262,6 +280,15 @@ export default function AdminLayout({ children }) {
               <span className="admin-brand-badge">ADMIN SUPER APP</span>
             </div>
           </div>
+          <button
+            type="button"
+            className="admin-sidebar-collapse-btn"
+            onClick={toggleSidebar}
+            title={sidebarOpen ? "Collapse Sidebar" : "Expand Sidebar"}
+            aria-label="Toggle Sidebar"
+          >
+            {sidebarOpen ? <PanelLeftClose size={16} /> : <PanelLeft size={16} />}
+          </button>
         </div>
 
         <nav className="admin-sidebar-nav">
@@ -305,7 +332,7 @@ export default function AdminLayout({ children }) {
 
         {/* Sidebar Footer */}
         <div className="admin-sidebar-footer">
-          <div className="admin-user-preview">
+          <div className="admin-user-preview" title={adminUser.name || 'Super Admin'}>
             <div className="admin-avatar">
               {adminUser.name?.charAt(0) || 'A'}
             </div>
@@ -314,14 +341,25 @@ export default function AdminLayout({ children }) {
               <span className="admin-user-email">{adminUser.email}</span>
             </div>
           </div>
-          <button
-            type="button"
-            className="admin-logout-btn"
-            onClick={handleLogout}
-            title="Logout from Admin"
-          >
-            <LogOut size={16} />
-          </button>
+          <div className="admin-footer-actions">
+            <button
+              type="button"
+              className="admin-footer-collapse-btn"
+              onClick={toggleSidebar}
+              title={sidebarOpen ? "Collapse Sidebar" : "Expand Sidebar"}
+              aria-label="Toggle Sidebar"
+            >
+              {sidebarOpen ? <PanelLeftClose size={16} /> : <PanelLeft size={16} />}
+            </button>
+            <button
+              type="button"
+              className="admin-logout-btn"
+              onClick={handleLogout}
+              title="Logout from Admin"
+            >
+              <LogOut size={16} />
+            </button>
+          </div>
         </div>
       </aside>
 
@@ -330,6 +368,16 @@ export default function AdminLayout({ children }) {
         {/* TOPBAR */}
         <header className="admin-topbar">
           <div className="admin-topbar-left">
+            <button
+              type="button"
+              className="admin-topbar-sidebar-btn"
+              onClick={toggleSidebar}
+              title={sidebarOpen ? "Collapse Sidebar" : "Expand Sidebar"}
+              aria-label="Toggle Sidebar"
+            >
+              {sidebarOpen ? <PanelLeftClose size={18} /> : <PanelLeft size={18} />}
+            </button>
+
             <button
               type="button"
               className="admin-search-trigger-btn"
